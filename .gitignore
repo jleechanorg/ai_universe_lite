@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+backend/logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Beads
+.beads/
+!.beads/.gitkeep
+
+# Generated gems (all except the v1 reference ai-rpg)
+gems/*
+!gems/.gitkeep
+!gems/ai-rpg/
+gems/ai-rpg/node_modules/
+gems/ai-rpg/dist/
+gems/ai-rpg/coverage/
+gems/ai-rpg/references/  # system-prompt bundle lives outside the gem; linked at build time
+
+# Build contexts (temp dirs from deploy.sh)
+build-context-*/
+tmp-*/
+
+# Secrets / runtime state
+*.pem
+*.key
+auth.json
+session-*.json

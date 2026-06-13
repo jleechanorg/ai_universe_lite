@@ -1,0 +1,27 @@
+// tool.ts.tmpl — a single FastMCP tool
+import { z } from "zod";
+import type { ToolFactory } from "@ai-universe/gem-runtime";
+
+const InputSchema = z.object({
+  // TODO: rendered from spec.tools[].inputs
+});
+
+const OutputSchema = z.object({
+  result: z.string(),
+});
+
+const tool: ToolFactory = (ctx) => ({
+  name: "{{TOOL_NAME}}",
+  description: "{{TOOL_DESCRIPTION}}",
+  parameters: InputSchema,
+  execute: async (params: z.infer<typeof InputSchema>) => {
+    // TODO: rendered from spec.tools[].prompt
+    const text = await ctx.callLlm(
+      "{{TOOL_MODEL}}",
+      `${ctx.systemPrompt}\n\nUser input: ${JSON.stringify(params)}`
+    );
+    return { content: [{ type: "text", text }] };
+  },
+});
+
+export default tool;

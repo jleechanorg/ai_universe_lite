@@ -1,0 +1,25 @@
+// server.ts.tmpl — FastMCP entrypoint for a generated gem
+import { FastMCP } from "fastmcp";
+import { loadGemContext } from "@ai-universe/gem-runtime";
+import { config } from "./config.js";
+import { GEM_SYSTEM_PROMPT } from "./system-prompt.js";
+
+const ctx = loadGemContext({
+  gemId: config.gemId,
+  gemVersion: config.gemVersion,
+  systemPrompt: GEM_SYSTEM_PROMPT,
+  bundleRefs: true,
+});
+
+const server = new FastMCP({ name: ctx.gemId, version: ctx.gemVersion });
+
+// Auto-discover tools in src/tools/*.ts
+for await (const toolMod of import.meta.glob("./tools/*.ts", { eager: true })) {
+  const mod = toolMod as { default?: (ctx: typeof ctx) => unknown };
+  if (typeof mod.default === "function") {
+    // @ts-expect-error - FastMCP type
+    server.addTool(mod.default(ctx));
+  }
+}
+
+server.start({ transportType: "httpStream", port: config.port });
