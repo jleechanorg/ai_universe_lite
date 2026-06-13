@@ -130,8 +130,8 @@ resource "google_cloud_run_service" "gem_cloud_run" {
             path = "/healthz"
             port = 8080
           }
-          period_seconds  = 30
-          timeout_seconds = 5
+          period_seconds    = 30
+          timeout_seconds   = 5
           failure_threshold = 3
         }
       }

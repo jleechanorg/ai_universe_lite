@@ -23,22 +23,18 @@ resource "google_artifact_registry_repository" "gems" {
   # accumulate fast and burn storage.
   cleanup_policy_dry_run = false
   cleanup_policies {
-    id     = "keep-recent-50"
-    action {
-      type = "KEEP"
-      most_recent_versions {
-        keep_count = 50
-      }
+    id = "keep-recent-50"
+    action = "KEEP"
+    most_recent_versions {
+      keep_count = 50
     }
   }
   cleanup_policies {
-    id     = "delete-untagged"
-    action {
-      type = "DELETE"
-      condition {
-        tag_state    = "UNTAGGED"
-        older_than   = "604800s" # 7 days
-      }
+    id = "delete-untagged"
+    action = "DELETE"
+    condition {
+      tag_state  = "UNTAGGED"
+      older_than = "604800s" # 7 days
     }
   }
 

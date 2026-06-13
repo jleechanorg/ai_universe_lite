@@ -43,10 +43,10 @@ resource "google_cloud_scheduler_job" "gem_ref_gc" {
     uri = "https://cleanup-run-${var.env}-${var.project}.a.run.app/v1/refs/gc"
 
     body = base64encode(jsonencode({
-      bucket    = google_storage_bucket.refs.name
+      bucket        = google_storage_bucket.refs.name
       olderThanDays = 30
-      env       = var.env
-      gem_id    = var.gem_id
+      env           = var.env
+      gem_id        = var.gem_id
     }))
 
     headers = {

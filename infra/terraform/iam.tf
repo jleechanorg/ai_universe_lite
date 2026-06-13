@@ -88,10 +88,10 @@ resource "google_bigquery_dataset" "gem_audit" {
 # Filter narrows to the gems + service accounts we care about, so we don't
 # pay for unrelated platform logs.
 resource "google_logging_project_sink" "gem_audit" {
-  name        = "gem-audit-sink-${var.env}"
-  project     = var.project
-  destination = "bigquery.googleapis.com/projects/${var.project}/datasets/${google_bigquery_dataset.gem_audit.dataset_id}"
-  filter      = <<-EOT
+  name                   = "gem-audit-sink-${var.env}"
+  project                = var.project
+  destination            = "bigquery.googleapis.com/projects/${var.project}/datasets/${google_bigquery_dataset.gem_audit.dataset_id}"
+  filter                 = <<-EOT
     resource.type=("cloud_run_revision" OR "iam_role" OR "secret_manager" OR "service_account")
     AND (
       resource.labels.service_name=~"^gem-.*-${var.env}$"
