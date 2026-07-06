@@ -58,3 +58,4 @@ tmp-*/
 *.key
 auth.json
 session-*.json
+infra/terraform/.terraform/
