@@ -1,0 +1,22 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - Dockerfile
+      - -t
+      - ${_REGISTRY}/gem-${_GEM_ID}:${_GEM_VERSION}
+      - .
+    dir: gems/${_GEM_ID}
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGISTRY}/gem-${_GEM_ID}:${_GEM_VERSION}
+substitutions:
+  - _REGISTRY=gcr.io/ai-universe-2025
+  - _GEM_ID=ai-rpg
+  - _GEM_VERSION=0.1.0
+options:
+  logging: CLOUD_LOGGING_ONLY
+images:
+  - ${_REGISTRY}/gem-${_GEM_ID}:${_GEM_VERSION}
