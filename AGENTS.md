@@ -1,5 +1,7 @@
 # Repository Guidelines
 
+Keep this file <= 200 lines; move detail to linked docs.
+
 This monorepo contains the **AI Universe Lite gem-builder pipeline**, the shared TypeScript libraries, operational scripts, and the v1 demo gem (`ai-rpg`).
 
 Use the updated READMEs (`README.md`, `backend/README.md`) as the source of truth for structure, capabilities, and setup details.
